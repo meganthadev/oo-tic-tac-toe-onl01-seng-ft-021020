@@ -1,3 +1,4 @@
+require 'pry'
 class TicTacToe
 
 	WIN_COMBINATIONS = [	[ 0, 1, 2 ], 
@@ -35,14 +36,18 @@ class TicTacToe
 	end
 
 	def valid_move?(index)
-		index = index.to_i - 1
-    index.between?(0,8) && !position_taken?(index.to_i)
+		index.between?(0,8) && !position_taken?(index.to_i)
 	end
 
 	def turn
 		puts "Please enter 1-9:"
 		index = gets.strip
-		valid_move?(index) == true ? move(index, current_player) && display_board : turn
+		if valid_move?(index) 
+		  move(index, current_player) 
+	  	display_board
+	  	else 
+	  	  turn 
+	  	end
 	end
 
 	def turn_count
@@ -75,7 +80,7 @@ class TicTacToe
 	end
 
 	def play
-
+    
 		while over? == false
 		turn
 		end
